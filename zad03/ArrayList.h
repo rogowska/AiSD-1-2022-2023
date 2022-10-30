@@ -79,13 +79,14 @@ public:
 
     void push_back(const T &item)
     {
-        if (full() == true)
+        if (full())
         {
             cout << "ArrayList is full, unable to add element to back" << endl;
         }
         else
         {
-            tab[last + 1] = item;
+            tab[last] = item;
+            last++;
         }
     }; // dodanie na koniec
 
@@ -150,16 +151,16 @@ public:
 
     }; // czyszczenie listy z elementow
 
-    void display()
+    friend ostream &operator<<(ostream &os, const ArrayList &list)
     {
-        cout << endl
-             << "[";
-        for (int i = 0; i < last + 1; i++)
+        os << "[ ";
+        for (int i = 0; i < list.size(); i++)
         {
-            cout << this[i] << " ";
+            os << list.tab[i] << " ";
         }
-        cout << "]" << endl;
-    }; // lepiej zdefiniowac operator<<
+        os << "]" << endl;
+        return os;
+    };
 
     void reverse()
     {
