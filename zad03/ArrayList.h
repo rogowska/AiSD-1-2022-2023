@@ -69,11 +69,12 @@ public:
         }
         else
         {
-            for (auto x : tab)
+            for (int i = last; i >= 0; i--)
             {
-                &(x + 1) = &x;
+                tab[i + 1] = tab[i];
             }
             tab[0] = item;
+            last++;
         }
     }; // dodanie na poczatek
 
@@ -92,28 +93,22 @@ public:
 
     T &front()
     {
-        if (empty() == true)
+        if (empty())
         {
             cout << "ArrayList is empty" << endl;
-            return NULL;
         }
-        else
-        {
-            return &tab[0];
-        }
+        return tab[0];
+
     }; // zwraca poczatek, nie usuwa, error dla pustej listy
 
     T &back()
     {
-        if (empty() == true)
+        if (empty())
         {
             cout << "ArrayList is empty" << endl;
-            return NULL;
         }
-        else
-        {
-            return &tab[last];
-        }
+        return tab[last-1];
+
     }; // zwraca koniec, nie usuwa, error dla pustej listy
 
     void pop_front()
@@ -124,9 +119,9 @@ public:
         }
         else
         {
-            for (auto x : tab)
+            for (int i = 0; i < last; i++)
             {
-                &x = &(x + 1);
+                tab[i] = tab[i + 1];
             }
             last--;
         }
@@ -164,14 +159,24 @@ public:
 
     void reverse()
     {
-        ArrayList<T> reversedArray = new ArrayList(msize);
-        while (!empty())
+        if (empty())
         {
-            reversedArray.push_back[*this.front()];
-            this.pop_back();
+            cout << "ArrayList is empty" << endl;
         }
-        this = reversedArray;
-        delete reversedArray;
+        else if (size() == 1)
+            return;
+
+        else
+        {
+            T *tempTab = new T[size()];
+
+            for (int i = 0; i < last; i++)
+            {
+                tempTab[i] = tab[last - 1 - i];
+            }
+            tab = tempTab;
+        }
+
     }; // odwracanie kolejnosci
 
     void sort()
@@ -200,39 +205,47 @@ public:
 
     void merge(ArrayList &other)
     {
-        int newSize = this.size() + other.size();
-        ArrayList<T> mergedArray = new ArrayList(newSize);
+        int newSize = this->size() + other.size();
+        T *tempTab = new T[newSize];
+        int i = 0;
         while (!this->empty() && !other.empty())
         {
             if (this->front() < other.front())
             {
-                mergedArray.push_front(this->front());
+                tempTab[i] = this->tab[0];
                 this->pop_front();
             }
             else
             {
-                mergedArray.push_front(other.front());
+                tempTab[i] = other.tab[0];
                 other.pop_front();
             }
+            i++;
         }
         if (this->empty())
         {
             while (!other.empty())
             {
-                mergedArray.push_front(other.front());
+                tempTab[i] = other.tab[0];
                 other.pop_front();
+                i++;
             }
         }
         else
         {
             while (!this->empty())
             {
-                mergedArray.push_front(this->front());
+                tempTab[i] = this->tab[0];
                 this->pop_front();
+                i++;
             }
         }
 
-    }; //  merges two sorted lists into one
+        this->msize = newSize;
+        this->last = newSize;
+        this->tab = tempTab;
+
+    } //  merges two sorted lists into one
 };
 
 #endif
