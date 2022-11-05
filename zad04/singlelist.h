@@ -1,18 +1,17 @@
 #ifndef SINGLELIST_H
 #define SINGLELIST_H
 
-#include <iostream> // deklaracje strumieni cout, cin, cerr
-#include <cassert>  // assert()
+#include <iostream>
+#include <cassert>  
 
 template <typename T>
 struct SingleNode
 {
-    // the default access mode and default inheritance mode are public
     T value;
     SingleNode *next;
-    SingleNode() : value(T()), next(nullptr) {} // konstruktor domyslny
+    SingleNode() : value(T()), next(nullptr) {} 
     SingleNode(const T &item, SingleNode *ptr = nullptr) : value(item), next(ptr) {}
-    ~SingleNode() { delete next; } // destruktor DOPISANE
+    ~SingleNode() {}
 };
 
 template <typename T>
@@ -22,35 +21,26 @@ class SingleList
 
 public:
     SingleList() : head(nullptr), tail(nullptr) {}
-    ~SingleList(); // tu trzeba wyczyscic wezly
+    ~SingleList();
 
-    SingleList(const SingleList &other); // copy constructor
-    // usage:   SingleList<int> list2(list1);
+    SingleList(const SingleList &other);
 
-    SingleList &operator=(const SingleList &other); // copy assignment operator, return *this
-    // usage:   list2 = list1;
+    SingleList &operator=(const SingleList &other);
 
     bool empty() const { return head == nullptr; }
-    int size() const;                       // O(n) bo trzeba policzyc
-    void push_front(const T &item);         // O(1), L.push_front(item)
-    void push_back(const T &item);          // O(1), L.push_back(item)
-    T &back() const { return tail->value; } // zwraca koniec, nie usuwa
-    void pop_front();                       // usuwa poczatek O(1)
-    void pop_back();                        // usuwa koniec O(n)
-    void clear();                           // czyszczenie listy z elementow O(n)
-    void display();                         // O(n)
-    void reverse();                         // O(n)
+    int size() const;                    
+    void push_front(const T &item);        
+    void push_back(const T &item);     
+    T &back() const { return tail->value; }
+    void pop_front();                   
+    void pop_back();                       
+    void clear();                          
+    void display();                        
+    void reverse();                         
 };
 
 template <typename T>
-SingleList<T>::SingleList(const SingleList &other)
-{
-    head = other->head;
-    tail = other->tail;
-}
-
-template <typename T>
-SingleList<T> SingleList<T>::&operator=(const SingleList &other)
+SingleList<T> &SingleList<T>::operator=(const SingleList &other)
 {
     head.value = other->head.value;
     tail.value = other->tail.value;
@@ -61,14 +51,46 @@ SingleList<T> SingleList<T>::&operator=(const SingleList &other)
 }
 
 template <typename T>
-int SingleList<T>::size()
+SingleList<T>::SingleList(const SingleList &other)
 {
+
+    if (other.head == nullptr)
+    {
+        head = nullptr;
+    }
+    else
+    {
+        head = new SingleNode<T>(other.head->value);
+        SingleNode<T> *thisIterator = head;
+        SingleNode<T> *otherIterator = other.head;
+
+        while (otherIterator->next != nullptr)
+        {
+
+            thisIterator->next = new SingleNode<T>(otherIterator->next->value);
+            thisIterator = thisIterator->next;
+            otherIterator = otherIterator->next;
+        }
+        tail = otherIterator;
+    }
+}
+
+template <typename T>
+int SingleList<T>::size() const
+{
+    if (empty())
+    {
+        return 0;
+    }
+    if (head == tail)
+        return 1;
+
     int counter = 0;
-    SingleNode<T> *iterator = this.head;
-    while (iterator != this.tail)
+    SingleNode<T> *iterator = head;
+    while (iterator != nullptr)
     {
         iterator = iterator->next;
-        counter++
+        counter++;
     }
     return counter;
 }
@@ -83,17 +105,25 @@ void SingleList<T>::clear()
 }
 
 template <typename T>
-void SingleList<T>::reverse() {
+void SingleList<T>::reverse()
+{
+    if (empty() || head == tail)
+    {
+        return;
+    }
 
-    SingleNode<T> nextNode;
-    SingleNode<T> previous;
+    tail = head;
+    SingleNode<T> *nextNode = NULL;
+    SingleNode<T> *previous = NULL;
 
-    while(current != nullptr){
+    while (head != nullptr)
+    {
         nextNode = head->next;
         head->next = previous;
         previous = head;
         head = nextNode;
     }
+    head = previous;
 }
 
 template <typename T>
