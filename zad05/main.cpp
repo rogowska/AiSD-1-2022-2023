@@ -3,30 +3,30 @@
 #include "doublelist.h"
 
 template <typename T>
-void test(DoubleList<T> list)
+void test(DoubleList<T> *list)
 {
     std::cout << "List tested: ";
-    list.display();
-    DoubleList<T> listcopy(list);
+    list->display();
+    DoubleList<T> listcopy(*list);
     DoubleList<T> listcopy2;
-    listcopy2 = list;
+    listcopy2 = *list;
     std::cout << "Copy constructor test; new list: ";
     listcopy.display();
     std::cout << "operator= test: ";
-    listcopy2.display() ;
-    std::cout << "List size is: " << list.size() << std::endl;
-    if (list.size() >= 2)
+    listcopy2.display();
+    std::cout << "List size is: " << list->size() << std::endl;
+    if (list->size() >= 2)
     {
-        list.pop_back();
-        list.pop_front();
+        list->pop_back();
+        list->pop_front();
         std::cout << "List with first and last element removed: ";
+        list->display();
     }
-    list.display();
     std::cout << "List reversed: ";
-    list.display_reversed();
+    list->display_reversed();
     std::cout << "List cleared: ";
-    //list.clear();
-    list.display();
+    list->clear();
+    list->display();
 }
 
 int main()
@@ -37,7 +37,7 @@ int main()
     intList.push_back(5);
     intList.push_back(9);
     intList.push_front(3);
-    test(intList);
+    test(&intList);
     std::cout << std::endl;
 
     DoubleList<std::string> stringList;
@@ -49,5 +49,5 @@ int main()
     stringList.push_back("Julian");
     stringList.push_back("Krzysiek");
     stringList.push_front("Ewangelina");
-    //test(stringList);
+    test(&stringList);
 }

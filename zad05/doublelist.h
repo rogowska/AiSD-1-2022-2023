@@ -159,14 +159,14 @@ void DoubleList<T>::pop_back()
 template <typename T>
 DoubleList<T> &DoubleList<T>::operator=(const DoubleList &other)
 {
-        if(this == &other)
-            return *this;
-
-        DoubleList<T> temp(other);
-        std::swap(temp.head, head);
-        std::swap(temp.tail, tail);
-
+    if (this == &other)
         return *this;
+
+    DoubleList<T> temp(other);
+    std::swap(temp.head, head);
+    std::swap(temp.tail, tail);
+
+    return *this;
 }
 
 template <typename T>
