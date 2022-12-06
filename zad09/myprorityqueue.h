@@ -18,18 +18,18 @@ public:
     MyPriorityQueue(MyPriorityQueue &&other)
     {
         lst = other.lst;
-        other.lst = nullptr;
+        other.lst.clear();
     }
     MyPriorityQueue &operator=(const MyPriorityQueue &other)
     {
         lst = other.lst;
-        return lst;
+        return *this;
     }
     MyPriorityQueue &operator=(MyPriorityQueue &&other)
     {
         lst = other.lst;
-        other.lst = nullptr;
-        return lst;
+        other.lst.clear();
+        return *this;
     }
     bool empty() const { return lst.empty(); }
     int size() const { return lst.size(); }
@@ -55,5 +55,6 @@ public:
     {
         std::copy(lst.begin(), lst.end(),
                   std::ostream_iterator<T>(std::cout, " "));
+        std::cout << std::endl;
     }
 };

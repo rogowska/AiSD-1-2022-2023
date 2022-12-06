@@ -9,7 +9,7 @@ CFLAGS = -Wall -std=c++11
 # Pliki obiektowe - powstaja z plikow *.cpp.
 OBJECTS = main.o
 # Pliki naglowkowe - sa wlaczane do plikow *.cpp.
-HFILES = myqueue.h
+HFILES = myprorityqueue.h
 # Koncowy plik wykonywalny.
 TARGET = zad09.out
 
