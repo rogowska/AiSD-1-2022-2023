@@ -6,12 +6,13 @@
 
 point o;
 
-point next_to_top(std::stack<point> stack_of_points){
+point next_to_top(std::stack<point> &stack_of_points)
+{
     point temp = stack_of_points.top();
     stack_of_points.pop();
-    point next_to_top = stack_of_points.top();
+    point next_point = stack_of_points.top();
     stack_of_points.push(temp);
-    return next_to_top;
+    return next_point;
 }
 
 double get_distance(point p1, point p2)
@@ -51,12 +52,12 @@ int angle_compare(const void *point1, const void *point2)
 std::stack<point> graham(std::vector<point> &points, int number_of_points)
 {
     o = points[0];
-    
+
     std::stack<point> points_stack;
     int oix;
 
     // choosing a starting point
-    for (int ix = 0; ix < number_of_points; ix ++)
+    for (int ix = 0; ix < number_of_points; ix++)
     {
         if (points[ix].y < o.y || (points[ix].y == o.y && points[ix].x < o.x))
         {
@@ -64,9 +65,6 @@ std::stack<point> graham(std::vector<point> &points, int number_of_points)
             oix = ix;
         }
     }
-
-    std::cout<<"points[0]"<< points[0].x<<" , "<<points[0].y;
-    std::cout<<"o"<<o.x<<" , "<<o.y;
 
     std::swap(points[0], points[oix]);
 
@@ -88,9 +86,13 @@ std::stack<point> graham(std::vector<point> &points, int number_of_points)
         do
         {
             points_stack.pop();
-        } while (get_direction(next_to_top(points_stack),points_stack.top(),points[i])< 0);
-        points_stack.push(points[i]);
+            points_stack.push(points[i]);
+        } while (get_direction(next_to_top(points_stack), points_stack.top(), points[i]) < 0);
     }
-
+        std::cout<<"points_stack size : " << points_stack.size() << std::endl;
+        while(!points_stack.empty()){
+        std::cout<< "(" << points_stack.top().x << "," << points_stack.top().y << ") ";
+        points_stack.pop();
+    }
     return points_stack;
 }
