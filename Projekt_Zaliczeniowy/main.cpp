@@ -1,13 +1,20 @@
 #include "point.h"
-#include "graham.cpp"
+#include "graham.h"
 #include <iostream>
 #include <vector>
 
 int main(){
     std::vector<point> points = {{4, 4}, {3, 2}, {5, 1}, {9, 0}, {0, 3}, {6, 5}, {14, 6}};
-    int number_of_points = sizeof(points)/sizeof(point);
+    int number_of_points = points.size();
 
-    std::cout << number_of_points << std::endl; 
+    std::cout<< "Data points: ";
+        for (point p : points)
+    {
+        std::cout << "(" << p.x << "," << p.y << ") ";
+    }
 
-    point result = graham(points, number_of_points);
+    std::cout << "number of points: " << number_of_points << std::endl; 
+
+    std::stack<point> result = graham(points, number_of_points);
+    
 }
