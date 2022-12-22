@@ -85,7 +85,7 @@ std::stack<point> graham(std::vector<point> &points, int number_of_points)
     for (int i = 3; i < number_of_points; i++)
     {
 
-        while (get_direction(next_to_top(points_stack), points_stack.top(), points[i]) < 0)
+        while (get_direction(next_to_top(points_stack), points_stack.top(), points[i]) <= 0)
         {
 
             points_stack.pop();

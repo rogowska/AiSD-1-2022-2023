@@ -20,23 +20,25 @@ int main(int argc, char *argv[])
         std::ifstream myfile;
         std::string filename = argv[1];
         point new_point;
-        int x;
-        int y;
         int count = 0;
         myfile.open(filename);
+
         if (myfile.is_open())
         {
-            while (myfile.good())
+
+            while (myfile >> new_point.x >> new_point.y)
             {
-                myfile >> x >> y;
-                new_point.x = x;
-                new_point.y = y;
+
                 points.push_back(new_point);
                 count++;
-                std::cout<<count<<std::endl;
             }
         }
         myfile.close();
+        if (count < 3)
+        {
+            std::cout << "Need more data to run a program" << std::endl;
+            return -1;
+        }
     }
     else
     {
