@@ -41,11 +41,11 @@ int angle_compare(const void *point1, const void *point2)
     }
     if (direction < 0)
     {
-        return -1;
+        return 1;
     }
     else
     {
-        return 1;
+        return -1;
     }
 }
 
@@ -69,7 +69,7 @@ std::stack<point> graham(std::vector<point> &points, int number_of_points)
     std::swap(points[0], points[oix]);
 
     // sorting all points
-    qsort(&points[1], number_of_points, sizeof(point), angle_compare);
+    qsort(&points[1], number_of_points - 1, sizeof(point), angle_compare);
     std::cout << "Points sorted: ";
     for (point p : points)
     {
@@ -81,17 +81,23 @@ std::stack<point> graham(std::vector<point> &points, int number_of_points)
     points_stack.push(points[1]);
     points_stack.push(points[2]);
 
+    //choosing convex hull points
     for (int i = 3; i < number_of_points; i++)
     {
-        do
+
+        while (get_direction(next_to_top(points_stack), points_stack.top(), points[i]) < 0)
         {
+
             points_stack.pop();
-            points_stack.push(points[i]);
-        } while (get_direction(next_to_top(points_stack), points_stack.top(), points[i]) < 0);
+        }
+        points_stack.push(points[i]);
     }
-        std::cout<<"points_stack size : " << points_stack.size() << std::endl;
-        while(!points_stack.empty()){
-        std::cout<< "(" << points_stack.top().x << "," << points_stack.top().y << ") ";
+
+    //displaying convex hull points
+    std::cout << "points_stack (convex hull points) size : " << points_stack.size() << std::endl;
+    while (!points_stack.empty())
+    {
+        std::cout << "(" << points_stack.top().x << "," << points_stack.top().y << ") ";
         points_stack.pop();
     }
     return points_stack;
