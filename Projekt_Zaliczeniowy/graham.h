@@ -7,6 +7,8 @@
 
 point o;
 
+#define OUTFILE "convex_hull_points.txt"
+
 //next to top item value in a stack
 point next_to_top(std::stack<point> &stack_of_points)
 {
@@ -103,8 +105,7 @@ void graham(std::vector<point> &points, int number_of_points)
         // displaying convex hull points and saving data to file
         std::cout << "points_stack (convex hull points) size : " << points_stack.size() << std::endl;
         std::ofstream out_file;
-        std::string outf_name = "convex_hull_points.txt";
-        out_file.open(outf_name);
+        out_file.open(OUTFILE);
         if (out_file.is_open())
         {
             while (!points_stack.empty())
