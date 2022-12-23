@@ -54,7 +54,7 @@ int angle_compare(const void *point1, const void *point2)
     }
 }
 
-std::stack<point> graham(std::vector<point> &points, int number_of_points)
+void graham(std::vector<point> &points, int number_of_points)
 {
     o = points[0];
 
@@ -120,5 +120,5 @@ std::stack<point> graham(std::vector<point> &points, int number_of_points)
     {
         std::cout << "Could not find a convex hull." << std::endl;
     }
-    return points_stack;
+
 }

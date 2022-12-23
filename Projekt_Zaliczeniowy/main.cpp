@@ -4,16 +4,13 @@
 #include <vector>
 #include <fstream>
 #include <string>
-#include <sstream>
-
-// Dobrze jest mieć możliwość wczytania punktów z pliku tekstowego (x i y w każdym wierszu),
-// a na końcu zapis punktów otoczki do pliku wynikowego.
-// Można wtedy użyć innych narzędzi (Python+Matplotlib) do narysowania punktów.
 
 int main(int argc, char *argv[])
 {
     std::vector<point> points;
     int number_of_points;
+
+    // checking if program has input file
     if (argc > 1)
 
     {
@@ -21,8 +18,9 @@ int main(int argc, char *argv[])
         std::string filename = argv[1];
         point new_point;
         int count = 0;
-        myfile.open(filename);
 
+        // opening and reading data from file
+        myfile.open(filename);
         if (myfile.is_open())
         {
 
@@ -33,13 +31,20 @@ int main(int argc, char *argv[])
                 count++;
             }
         }
+        else
+        {
+            std::cout << "Error opening file." << std::endl;
+            return -1;
+        }
         myfile.close();
+
         if (count < 3)
         {
-            std::cout << "Need more data to run a program" << std::endl;
+            std::cout << "Need more data to run a program." << std::endl;
             return -1;
         }
     }
+    // example data points for program without input file
     else
     {
         points = {{2, 5}, {6, 6}, {5, 3}, {4, 2}, {9, 3}, {2, 0}, {-1, 1}, {9, 0}, {6, 1}};
@@ -55,11 +60,7 @@ int main(int argc, char *argv[])
 
     std::cout << "number of points: " << number_of_points << std::endl;
 
-    std::stack<point> result = graham(points, number_of_points);
+    graham(points, number_of_points);
 
-    while (!result.empty())
-    {
-        std::cout << "(" << result.top().x << "," << result.top().y << ") ";
-        result.pop();
-    }
+    return 0;
 }
