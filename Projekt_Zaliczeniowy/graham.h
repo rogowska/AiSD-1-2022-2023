@@ -2,10 +2,12 @@
 #include <vector>
 #include <cmath>
 #include <iostream>
+#include <fstream>
 #include <stack>
 
 point o;
 
+//next to top item value in a stack
 point next_to_top(std::stack<point> &stack_of_points)
 {
     point temp = stack_of_points.top();
@@ -15,18 +17,21 @@ point next_to_top(std::stack<point> &stack_of_points)
     return next_point;
 }
 
+//getting distance between two points
 double get_distance(point p1, point p2)
 {
     double distance = sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
     return distance;
 }
 
+//getting direction using vector product
 double get_direction(point p1, point p2, point p3)
 {
     int direction = (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
     return direction;
 }
 
+//angle comparement for quicksort
 int angle_compare(const void *point1, const void *point2)
 {
     point *p1 = (point *)point1;
@@ -81,7 +86,7 @@ std::stack<point> graham(std::vector<point> &points, int number_of_points)
     points_stack.push(points[1]);
     points_stack.push(points[2]);
 
-    //choosing convex hull points
+    // choosing convex hull points
     for (int i = 3; i < number_of_points; i++)
     {
 
@@ -93,12 +98,27 @@ std::stack<point> graham(std::vector<point> &points, int number_of_points)
         points_stack.push(points[i]);
     }
 
-    //displaying convex hull points
-    std::cout << "points_stack (convex hull points) size : " << points_stack.size() << std::endl;
-    while (!points_stack.empty())
+    if (points_stack.size() >= 3)
     {
-        std::cout << "(" << points_stack.top().x << "," << points_stack.top().y << ") ";
-        points_stack.pop();
+        // displaying convex hull points and saving data to file
+        std::cout << "points_stack (convex hull points) size : " << points_stack.size() << std::endl;
+        std::ofstream out_file;
+        std::string outf_name = "convex_hull_points.txt";
+        out_file.open(outf_name);
+        if (out_file.is_open())
+        {
+            while (!points_stack.empty())
+            {
+                std::cout << "(" << points_stack.top().x << "," << points_stack.top().y << ") ";
+                out_file << points_stack.top().x << " " << points_stack.top().y << std::endl;
+                points_stack.pop();
+            }
+        }
+        out_file.close();
+    }
+    else
+    {
+        std::cout << "Could not find a convex hull." << std::endl;
     }
     return points_stack;
 }
