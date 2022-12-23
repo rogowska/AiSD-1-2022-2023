@@ -1,0 +1,28 @@
+|Projekt zaliczeniowy           |
+|"Znajdowanie otoczki wypuklej" |
+|AiSD I 2022                    |
+|Oliwia Rogowska                |
+|_______________________________|
+
+Program sklada sie z pliku glownego "main.cpp" oraz dwoch plikow naglowkowych:
+"graham.h" i "point.h". Poza wynikami dzialania programu prezentowanymi na konsoli
+tworzony jest plik convex_hull_points.txt do ktorego zapisywane sa dane wyjsciowe.
+_______________________________________________________________________________________
+
+Aby skompilowac program, nalezy wykonac komende:
+make 
+________________________________________________________________________________________
+
+Aby uruchomic program, nalezy wykonac komende:
+
+1) ./main.out - (bezargumentowo, zostaje zaprezentowane dzialanie dla przykladowego
+zbioru punktow)
+
+2) ./main.out nazwa_pliku_wejsciowego - gdzie plik wejsciowy zawiera wspolrzedne punktow
+x y (kazdy punkt w osobnym wierszu)
+_________________________________________________________________________________________
+
+Aby wyczyscic folder z plikow obiektowych i pliku wynikowego, nalezy wykonac komende:
+make clean
+
+##########################################################################################
