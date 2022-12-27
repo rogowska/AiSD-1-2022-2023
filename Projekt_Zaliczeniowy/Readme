@@ -6,7 +6,7 @@
 
 Program sklada sie z pliku glownego "main.cpp" oraz dwoch plikow naglowkowych:
 "graham.h" i "point.h". Poza wynikami dzialania programu prezentowanymi na konsoli
-tworzony jest plik convex_hull_points.txt do ktorego zapisywane sa dane wyjsciowe.
+tworzony jest plik .txt do ktorego zapisywane sa dane wyjsciowe.
 _______________________________________________________________________________________
 
 Aby skompilowac program, nalezy wykonac komende:
@@ -15,11 +15,11 @@ ________________________________________________________________________________
 
 Aby uruchomic program, nalezy wykonac komende:
 
-1) ./main.out - (bezargumentowo, zostaje zaprezentowane dzialanie dla przykladowego
+1) ./main.out nazwa_pliku_wyjsciowego - (zostaje zaprezentowane dzialanie dla przykladowego
 zbioru punktow)
 
-2) ./main.out nazwa_pliku_wejsciowego - gdzie plik wejsciowy zawiera wspolrzedne punktow
-x y (kazdy punkt w osobnym wierszu)
+2) ./main.out nazwa_pliku_wyjsciowego nazwa_pliku_wejsciowego - gdzie plik wejsciowy zawiera
+wspolrzedne punktow x y (kazdy punkt w osobnym wierszu)
 _________________________________________________________________________________________
 
 Aby wyczyscic folder z plikow obiektowych i pliku wynikowego, nalezy wykonac komende:

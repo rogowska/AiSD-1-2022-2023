@@ -7,8 +7,6 @@
 
 point o;
 
-#define OUTFILE "convex_hull_points.txt"
-
 //next to top item value in a stack
 point next_to_top(std::stack<point> &stack_of_points)
 {
@@ -56,7 +54,7 @@ int angle_compare(const void *point1, const void *point2)
     }
 }
 
-void graham(std::vector<point> &points, int number_of_points)
+void graham(std::vector<point> &points, int number_of_points, std::string output_filename)
 {
     o = points[0];
 
@@ -77,10 +75,10 @@ void graham(std::vector<point> &points, int number_of_points)
 
     // sorting all points
     qsort(&points[1], number_of_points - 1, sizeof(point), angle_compare);
-    std::cout << "Points sorted: ";
+    std::cout << "Points sorted: "<<std::endl;
     for (point p : points)
     {
-        std::cout << "(" << p.x << "," << p.y << ") ";
+        std::cout << "(" << p.x << "," << p.y << ") "<<std::endl;
     }
 
     // pushing first three points to stack;
@@ -105,12 +103,12 @@ void graham(std::vector<point> &points, int number_of_points)
         // displaying convex hull points and saving data to file
         std::cout << "points_stack (convex hull points) size : " << points_stack.size() << std::endl;
         std::ofstream out_file;
-        out_file.open(OUTFILE);
+        out_file.open(output_filename);
         if (out_file.is_open())
         {
             while (!points_stack.empty())
             {
-                std::cout << "(" << points_stack.top().x << "," << points_stack.top().y << ") ";
+                std::cout << "(" << points_stack.top().x << "," << points_stack.top().y << ") "<<std::endl;
                 out_file << points_stack.top().x << " " << points_stack.top().y << std::endl;
                 points_stack.pop();
             }
