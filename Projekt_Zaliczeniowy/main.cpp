@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
 {
     std::vector<point> points;
     int number_of_points;
+    std::string output_filename;
 
     // checking if program has input and output file names
     if (argc == 3)
@@ -18,6 +19,7 @@ int main(int argc, char *argv[])
     {
         std::ifstream myfile;
         std::string input_filename = argv[1];
+        output_filename =  argv[2];
         point new_point;
         int count = 0;
 
@@ -47,23 +49,26 @@ int main(int argc, char *argv[])
         }
     }
     // example data points for program without input file name
-    else if (argc == 2)
+    else if (argc == 1)
     {
+        output_filename = "sample_output";
         points = {{2, 5}, {6, 6}, {5, 3}, {4, 2}, {9, 3}, {2, 0}, {-1, 1}, {9, 0}, {6, 1}};
+
     }
     // help display
     else if (strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0)
     {
-        std::cout << "Program implements Graham alghoritm and finds a convex hull of a data points (x, y)." << std::endl;
-        std::cout<< "Program run with parameter [output_file_name.txt] finds convex hull for a hardcoded data points and saves them to output file"<<std::endl;
-        std::cout<< "Program run with parameters [output_file_name_.txt] [input_file_name_.txt] uses points from input file and saves results to output file" << std::endl;
-        std::cout<< "Data points in the input file has to be in format: x y - coordinates of one point for each line in a file" << std::endl;
+        std::cout << "usage:\n \tprogram_exec_name [input_file] [output_file]\n\n"<<std::endl;
+        std::cout << "Program implements Graham alghoritm and finds a convex hull of a data points (x, y) provided in file" << std::endl;
+        std::cout << "Data points in the input file has to be in format: x y - coordinates of one point for each line in a file." << std::endl;
+        std::cout << "When run without parameters it finds convex hull for a hardcoded data points and saves them to sample output file.\n"<<std::endl;
+
         return -1;
     }
     else
     {
-        std::cout << "Wrong number of arguments; expected: output file name, optionally: input file name." << std::endl;
-        std::cout<< "Run program with --help or -h parameter for help"<< std::endl;
+        std::cout << "Wrong number of arguments; expected: input file name and output file name." << std::endl;
+        std::cout << "Run program with --help or -h parameter for help."<< std::endl;
         return -1;
     }
 
@@ -77,7 +82,7 @@ int main(int argc, char *argv[])
 
     std::cout << "number of points: " << number_of_points << std::endl;
 
-    graham(points, number_of_points, argv[1]);
+    graham(points, number_of_points, output_filename);
 
     return 0;
 }

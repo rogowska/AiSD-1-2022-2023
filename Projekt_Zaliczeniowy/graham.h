@@ -56,6 +56,7 @@ int angle_compare(const void *point1, const void *point2)
 
 void graham(std::vector<point> &points, int number_of_points, std::string output_filename)
 {
+    std::cout << output_filename << std::endl;
     o = points[0];
 
     std::stack<point> points_stack;
