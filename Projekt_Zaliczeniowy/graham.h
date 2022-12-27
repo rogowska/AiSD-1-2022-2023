@@ -27,7 +27,7 @@ double get_distance(point p1, point p2)
 //getting direction using vector product
 double get_direction(point p1, point p2, point p3)
 {
-    int direction = (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
+    double direction = (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
     return direction;
 }
 
@@ -59,10 +59,10 @@ void graham(std::vector<point> &points, int number_of_points, std::string output
     o = points[0];
 
     std::stack<point> points_stack;
-    int oix;
+    int oix = 0;
 
     // choosing a starting point
-    for (int ix = 0; ix < number_of_points; ix++)
+    for (int ix = 1; ix < number_of_points; ix++)
     {
         if (points[ix].y < o.y || (points[ix].y == o.y && points[ix].x < o.x))
         {
@@ -90,9 +90,8 @@ void graham(std::vector<point> &points, int number_of_points, std::string output
     for (int i = 3; i < number_of_points; i++)
     {
 
-        while (get_direction(next_to_top(points_stack), points_stack.top(), points[i]) <= 0)
+        while (points_stack.size()>1 and get_direction(next_to_top(points_stack), points_stack.top(), points[i]) <= 0)
         {
-
             points_stack.pop();
         }
         points_stack.push(points[i]);
