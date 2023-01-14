@@ -9,7 +9,6 @@
 #include <cstring>
 #include <cstdio>
 
-
 int main(int argc, char *argv[])
 {
     std::vector<point> points;

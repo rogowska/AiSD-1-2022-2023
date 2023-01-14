@@ -76,10 +76,6 @@ std::vector<point> graham(std::vector<point> &points, int number_of_points)
 
     // sorting all points
     qsort(&points[1], number_of_points - 1, sizeof(point), angle_compare);
-    for (point p : points)
-    {
-        std::cout << "(" << p.x << "," << p.y << ") "<<std::endl;
-    }
 
     // pushing first three points to stack;
     points_stack.push(points[0]);
@@ -107,7 +103,6 @@ std::vector<point> graham(std::vector<point> &points, int number_of_points)
     }
     else
     {
-        std::cout << "Could not find a convex hull." << std::endl;
         exit(-1);
     }
 
