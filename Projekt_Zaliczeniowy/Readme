@@ -4,6 +4,11 @@
 |Oliwia Rogowska                |
 |_______________________________|
 
+Algorytm Grahama sluzy do znajdowania otoczki wypuklej skonczonego zbioru punktow
+plaszczyzny. Polega on na przechodzeniu do kolejnych wierzcholkow z posortowanej listy,
+umieszczaniu ich na stosie i sprawdzaniu kierunku, w ktorym nastapilo przejscie:
+jezeli odchylenie nastapilo w prawa strone, zdejmowany jest wierzcholek ze stosu.
+
 Program sklada sie z pliku glownego "main.cpp" oraz dwoch plikow naglowkowych:
 "graham.h" i "point.h". Poza wynikami dzialania programu prezentowanymi na konsoli
 tworzony jest plik .txt do ktorego zapisywane sa dane wyjsciowe.
@@ -15,11 +20,19 @@ ________________________________________________________________________________
 
 Aby uruchomic program, nalezy wykonac komende:
 
-1) ./main.out nazwa_pliku_wyjsciowego - (zostaje zaprezentowane dzialanie dla przykladowego
-zbioru punktow)
+1) ./main.out - (zostaje zaprezentowane dzialanie dla przykladowego zbioru punktow)
 
-2) ./main.out nazwa_pliku_wyjsciowego nazwa_pliku_wejsciowego - gdzie plik wejsciowy zawiera
+2) ./main.out nazwa_pliku_wejsciowego nazwa_pliku_wyjsciowego - gdzie plik wejsciowy zawiera
 wspolrzedne punktow x y (kazdy punkt w osobnym wierszu)
+_________________________________________________________________________________________
+
+Aby uzyskac pomoc nalezy wykonac komende:
+
+./main.out --help 
+
+lub
+
+./main.out -h
 _________________________________________________________________________________________
 
 Aby wyczyscic folder z plikow obiektowych i pliku wynikowego, nalezy wykonac komende:

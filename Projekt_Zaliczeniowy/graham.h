@@ -54,9 +54,9 @@ int angle_compare(const void *point1, const void *point2)
     }
 }
 
-void graham(std::vector<point> &points, int number_of_points, std::string output_filename)
+std::vector<point> graham(std::vector<point> &points, int number_of_points)
 {
-    std::cout << output_filename << std::endl;
+    std::vector<point> results;
     o = points[0];
 
     std::stack<point> points_stack;
@@ -76,7 +76,6 @@ void graham(std::vector<point> &points, int number_of_points, std::string output
 
     // sorting all points
     qsort(&points[1], number_of_points - 1, sizeof(point), angle_compare);
-    std::cout << "Points sorted: "<<std::endl;
     for (point p : points)
     {
         std::cout << "(" << p.x << "," << p.y << ") "<<std::endl;
@@ -100,24 +99,16 @@ void graham(std::vector<point> &points, int number_of_points, std::string output
 
     if (points_stack.size() >= 3)
     {
-        // displaying convex hull points and saving data to file
-        std::cout << "points_stack (convex hull points) size : " << points_stack.size() << std::endl;
-        std::ofstream out_file;
-        out_file.open(output_filename);
-        if (out_file.is_open())
-        {
-            while (!points_stack.empty())
-            {
-                std::cout << "(" << points_stack.top().x << "," << points_stack.top().y << ") "<<std::endl;
-                out_file << points_stack.top().x << " " << points_stack.top().y << std::endl;
-                points_stack.pop();
-            }
+        while(!points_stack.empty()){
+            results.push_back(points_stack.top());
+            points_stack.pop();
         }
-        out_file.close();
+        return results;
     }
     else
     {
         std::cout << "Could not find a convex hull." << std::endl;
+        exit(-1);
     }
 
 }
