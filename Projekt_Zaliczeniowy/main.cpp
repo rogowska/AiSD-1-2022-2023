@@ -13,7 +13,6 @@ int main(int argc, char *argv[])
 {
     std::vector<point> points;
     std::vector<point> result_points;
-    int number_of_points;
     std::string output_filename;
 
     // checking if program has input and output file names
@@ -47,17 +46,13 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    number_of_points = points.size();
-
     std::cout << "Data points: " << std::endl;
     for (point p : points)
     {
         std::cout << "(" << p.x << "," << p.y << ") " << std::endl;
     }
 
-    std::cout << "number of points: " << number_of_points << std::endl;
-
-    result_points = graham(points, number_of_points);
+    result_points = graham(points);
 
     std::cout << "Points found:" << std::endl;
 

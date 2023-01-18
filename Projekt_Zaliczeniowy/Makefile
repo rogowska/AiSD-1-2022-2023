@@ -9,7 +9,7 @@ CFLAGS = -Wall -std=c++11
 # Pliki obiektowe - powstaja z plikow *.cpp.
 OBJECTS = main.o
 # Pliki naglowkowe - sa wlaczane do plikow *.cpp.
-HFILES = graham.h point.h read_from_file.h write_yo_file.h
+HFILES = graham.h point.h read_from_file.h write_to_file.h
 # Plik wynikowy
 OUTFILE = convex_hull_points.txt
 # Koncowy plik wykonywalny.

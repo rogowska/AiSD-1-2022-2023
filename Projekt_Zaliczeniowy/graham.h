@@ -54,8 +54,10 @@ int angle_compare(const void *point1, const void *point2)
     }
 }
 
-std::vector<point> graham(std::vector<point> &points, int number_of_points)
+std::vector<point> graham(std::vector<point> &points)
 {
+    int number_of_points = points.size();
+    
     std::vector<point> results;
     o = points[0];
 
